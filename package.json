@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/zzarcon/mp3trify",
   "dependencies": {
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "got": "^4.2.0"
   }
 }

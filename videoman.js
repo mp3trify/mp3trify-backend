@@ -7,15 +7,38 @@ module.exports = function() {
     return false;
   }
 
+  function getEl() {
+    return "na";
+  }
+
+  function getAc() {
+    return "www";
+  }
+
+  function getT() {
+    return "grp";
+  }
+
+  function time() {
+    return new Date().getTime();
+  }
+
   function pushItem(videoId) {
-    var time = new Date().getTime();
-    var uri = "/a/pushItem/?item=" + escape(video + videoId) + "&el=na&bf=" + getBF() + "&r=" + time;
+    var uri = "/a/pushItem/?item=" + escape(video + videoId) + "&el=" + getEl() + "&bf=" + getBF() + "&r=" + time();
     var s = '&s=' + sig(uri);
 
     return [host, uri, s].join('');
   };
 
+  function itemInfo(videoId) {
+    var uri = "/a/itemInfo/?video_id=" + videoId + "&ac=" + getAc() + "&t=" + getT() + "r=" + time();
+    var s = '&s=' + sig(uri);
+
+    return [host, uri, s].join('');
+  }
+
   return {
-    pushItem: pushItem
+    pushItem: pushItem,
+    itemInfo: itemInfo
   }
 }();
