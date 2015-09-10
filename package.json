@@ -1,0 +1,22 @@
+{
+  "name": "mp3trify",
+  "version": "0.1.0",
+  "description": "The Youtube mp3 downloader you were looking for",
+  "main": "index.js",
+  "scripts": {
+    "start": "node-supervisor index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zzarcon/mp3trify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zzarcon/mp3trify/issues"
+  },
+  "homepage": "https://github.com/zzarcon/mp3trify",
+  "dependencies": {
+    "express": "4.13.3"
+  }
+}
