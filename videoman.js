@@ -1,6 +1,6 @@
 var sig = require('./sig');
 var host = "http://www.youtube-mp3.org";
-var video = "http://www.youtube.com/watch?v=";
+var video = "https://www.youtube.com/watch?v=";
 
 module.exports = function() {
   function getBF() {

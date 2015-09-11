@@ -6,13 +6,19 @@ var app = express();
 app.get('/fetch_song/:id', function (req, res) {
   var videoId = req.params.id;
   var pushItem = videoman.pushItem(videoId);
+  var options = {
+    headers: {
+      "Accept-Location": "*",
+      "Referer": "http://www.youtube-mp3.org/es"
+    }
+  };
 
-  got(pushItem, function(err, data, r) {
+  got(pushItem, options, function(err, data, r) {
     var itemInfo = videoman.itemInfo(videoId);
 
     res.send({
-      itemInfo: itemInfo,
-      pushItem: pushItem
+      status_url: "/song_status/" + videoId,
+      data: data
     });
   });
 });
@@ -20,7 +26,6 @@ app.get('/fetch_song/:id', function (req, res) {
 app.get('/song_status/:id', function (req, res) {
   var videoId = req.params.id;
   var itemInfo = videoman.itemInfo(videoId);
-  console.log(itemInfo);
 
   got(itemInfo, function(err, data, r) {
     //TODO: Add safety checks...
