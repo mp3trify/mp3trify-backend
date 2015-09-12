@@ -37,8 +37,19 @@ module.exports = function() {
     return [host, uri, s].join('');
   }
 
+  function songSrc(info, videoId) {
+    var tsCreate = info.ts_create;
+    var r = encodeURIComponent(info.r); 
+    var h2 = info.h2;
+    var uri = '/get?video_id=' + videoId + '&ts_create=' + tsCreate + '&r=' + r + '&h2=' + h2;
+    var s = '&s=' + sig(uri);
+
+    return [host, uri, s].join('');
+  }
+
   return {
     pushItem: pushItem,
-    itemInfo: itemInfo
+    itemInfo: itemInfo,
+    songSrc: songSrc
   }
 }();

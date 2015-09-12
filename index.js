@@ -1,7 +1,10 @@
 var express = require('express');
-var videoman = require('./videoman');
+var cors = require('cors');
 var got = require('got');
+var videoman = require('./videoman');
 var app = express();
+
+app.use(cors());
 
 app.get('/fetch_song/:id', function (req, res) {
   var videoId = req.params.id;
@@ -30,13 +33,23 @@ app.get('/song_status/:id', function (req, res) {
   got(itemInfo, function(err, data, r) {
     //TODO: Add safety checks...
     //Sanitize response
-    console.log(data);
     data = data.replace('info = ', '')
     data = data.substring(0, data.length - 1);
+    data = JSON.parse(data);
 
-    res.send({
-      data: JSON.parse(data)
-    });
+    response = {
+      title: data.title,
+      minutes: data.length,
+      status: data.status,
+      progress: data.progress,
+      speed: data.progress_speed
+    };
+
+    if (data.status === 'serving') {
+      response.song_src = videoman.songSrc(data, videoId);
+    }
+
+    res.send(response);
   });
 });
 
