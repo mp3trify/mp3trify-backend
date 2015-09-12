@@ -4,7 +4,8 @@
   "description": "The Youtube mp3 downloader you were looking for",
   "main": "index.js",
   "scripts": {
-    "start": "node-supervisor index.js"
+    "start": "node index.js",
+    "dev": "node-supervisor index.js"
   },
   "repository": {
     "type": "git",
