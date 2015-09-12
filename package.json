@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node-supervisor index.js"
+    "dev": "node-supervisor index.js",
+    "deploy": "git push heroku master",
+    "set_remote": "git remote rm heroku && heroku git:remote -a mp3trify"
   },
   "repository": {
     "type": "git",
