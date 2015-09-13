@@ -31,6 +31,7 @@ app.get('/song_status/:id', function (req, res) {
   var videoId = req.params.id;
   var itemInfo = videoman.itemInfo(videoId);
 
+  console.log('itemInfo', itemInfo);
   got(itemInfo, function(err, data, r) {
     //TODO: Add safety checks...
     //Sanitize response
@@ -44,7 +45,8 @@ app.get('/song_status/:id', function (req, res) {
       status: data.status,
       progress: data.progress,
       speed: data.progress_speed,
-      metadata: data
+      metadata: data,
+      itemInfo: itemInfo
     };
 
     if (data.status === 'serving') {

@@ -40,8 +40,10 @@ module.exports = function() {
 
   function songSrc(info, videoId) {
     var tsCreate = info.ts_create;
+    // tsCreate = 1442167525;
     var r = encodeURIComponent(R);//info.r
     var h2 = info.h2;
+    // h2 = "2b85f3f9c7d0ba4613e4c957eec33db2";
     var uri = '/get?video_id=' + videoId + '&ts_create=' + tsCreate + '&r=' + r + '&h2=' + h2;
     var s = '&s=' + sig(uri);
 
