@@ -1,6 +1,7 @@
 var sig = require('./sig');
 var host = "http://www.youtube-mp3.org";
 var video = "https://www.youtube.com/watch?v=";
+var R = "OTAuMTYzLjQ2LjE4NQ==";
 
 module.exports = function() {
   function getBF() {
@@ -39,7 +40,7 @@ module.exports = function() {
 
   function songSrc(info, videoId) {
     var tsCreate = info.ts_create;
-    var r = encodeURIComponent(info.r); 
+    var r = encodeURIComponent(R);//info.r
     var h2 = info.h2;
     var uri = '/get?video_id=' + videoId + '&ts_create=' + tsCreate + '&r=' + r + '&h2=' + h2;
     var s = '&s=' + sig(uri);
