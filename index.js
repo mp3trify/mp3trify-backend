@@ -43,7 +43,8 @@ app.get('/song_status/:id', function (req, res) {
       minutes: data.length,
       status: data.status,
       progress: data.progress,
-      speed: data.progress_speed
+      speed: data.progress_speed,
+      metadata: data
     };
 
     if (data.status === 'serving') {
