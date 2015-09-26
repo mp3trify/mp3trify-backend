@@ -19,11 +19,11 @@ app.get('/fetch_song/:id', function (req, res) {
   
   got(pushItem, requestOptions, function(err, data, r) {
     var itemInfo = videoman.itemInfo(videoId);
-
+    console.log('fetch_song response', data);
     res.send({
       pushItem: pushItem,
       status_url: "/song_status/" + videoId,
-      data: data
+      pid: data.split("\n")[0]
     });
   });
 });
@@ -33,6 +33,7 @@ app.get('/song_status/:pid', function (req, res) {
   var itemInfo = videoman.itemInfo(pid);
 
   got(itemInfo, requestOptions, function(err, data, r) {
+    console.log('song_status response', data);
     //TODO: Add safety checks...
     //Sanitize response
     data = data.replace('info = ', '');
