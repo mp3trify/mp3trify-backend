@@ -1,6 +1,6 @@
 var sig = require('./sig');
 var host = "http://www.youtube-mp3.org";
-var video = "https://www.youtube.com/watch?v=";
+var video = "http://www.youtube.com/watch?v=";
 var R = "OTAuMTYzLjQ2LjE4NQ==";
 
 module.exports = function() {
@@ -25,26 +25,23 @@ module.exports = function() {
   }
 
   function pushItem(videoId) {
-    var uri = "/a/pushItem/?item=" + escape(video + videoId) + "&el=" + getEl() + "&bf=" + getBF() + "&r=" + time();
+    var uri = "/a2/c/pushItem?item=" + escape(video + videoId) + "&el=" + getEl() + "&bf=" + getBF() + "&r=" + time();
     var s = '&s=' + sig(uri);
 
     return [host, uri, s].join('');
   };
 
-  function itemInfo(videoId) {
-    var uri = "/a/itemInfo/?video_id=" + videoId + "&ac=" + getAc() + "&t=" + getT() + "r=" + time();
+  function itemInfo(pid) {
+    var uri = "/a2/c/itemInfo?pid=" + pid + "&ac=" + getAc() + "&t=" + getT() + "r=" + time();
     var s = '&s=' + sig(uri);
 
     return [host, uri, s].join('');
   }
 
-  function songSrc(info, videoId) {
-    var tsCreate = info.ts_create;
-    // tsCreate = 1442167525;
-    var r = encodeURIComponent(R);//info.r
-    var h2 = info.h2;
-    // h2 = "2b85f3f9c7d0ba4613e4c957eec33db2";
-    var uri = '/get?video_id=' + videoId + '&ts_create=' + tsCreate + '&r=' + r + '&h2=' + h2;
+  function songSrc(info, pid) {
+    var h = info.h;
+    var r = time();
+    var uri = '/a2/c/getData?pid=' + pid + '&h=' + h + '&r=' + r;
     var s = '&s=' + sig(uri);
 
     return [host, uri, s].join('');

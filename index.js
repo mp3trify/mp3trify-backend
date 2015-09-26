@@ -21,21 +21,21 @@ app.get('/fetch_song/:id', function (req, res) {
     var itemInfo = videoman.itemInfo(videoId);
 
     res.send({
+      pushItem: pushItem,
       status_url: "/song_status/" + videoId,
       data: data
     });
   });
 });
 
-app.get('/song_status/:id', function (req, res) {
-  var videoId = req.params.id;
-  var itemInfo = videoman.itemInfo(videoId);
+app.get('/song_status/:pid', function (req, res) {
+  var pid = req.params.pid;
+  var itemInfo = videoman.itemInfo(pid);
 
-  console.log('itemInfo', itemInfo);
   got(itemInfo, requestOptions, function(err, data, r) {
     //TODO: Add safety checks...
     //Sanitize response
-    data = data.replace('info = ', '')
+    data = data.replace('info = ', '');
     data = data.substring(0, data.length - 1);
     data = JSON.parse(data);
 
@@ -50,7 +50,7 @@ app.get('/song_status/:id', function (req, res) {
     };
 
     if (data.status === 'serving') {
-      response.song_src = videoman.songSrc(data, videoId);
+      response.song_src = videoman.songSrc(data, pid);
     }
 
     res.send(response);
